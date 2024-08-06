@@ -1,0 +1,49 @@
+.header {
+  background-color: #000;
+  color: #fff;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.logo {
+  width: 75px;
+  cursor: pointer;
+}
+
+.app-name {
+  font-size: 30px;
+  background: linear-gradient(
+    90deg,
+    #866ee7,
+    #ea60da,
+    #ed8f57,
+    #fbd41d,
+    #2cca91
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  // text-fill-color: transparent;
+  display: block;
+  cursor: pointer;
+}
+
+.nav-items > ul {
+  display: flex;
+}
+
+.nav-items > ul > li {
+  padding: 20px;
+  list-style-type: none;
+
+  &:hover {
+    color: #ff7576;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .nav-items {
+    display: none;
+  }
+}

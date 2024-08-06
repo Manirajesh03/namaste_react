@@ -1,0 +1,16 @@
+.body-container {
+  .filter {
+    .filter-btn {
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 5px;
+      border: none;
+      background-color: unset;
+      border: 1px solid#ff7576;
+
+      &:hover {
+        background-color: #fff;
+      }
+    }
+  }
+}
