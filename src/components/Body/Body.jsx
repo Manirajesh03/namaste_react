@@ -3,6 +3,8 @@ import Search from "../Search";
 import "./style.scss";
 import RestaurantCard from "../RestaurantCard";
 import Shimmer from "../Shimmer";
+import { Link } from "react-router-dom";
+import useOnlineStatus from "../../utils/useOnlineStatus";
 
 const Body = () => {
   const [restaList, setRestaList] = useState([]);
@@ -54,18 +56,32 @@ const Body = () => {
     }
   }, [searchText]);
 
+  const onlineStatus = useOnlineStatus();
+
+  if (!onlineStatus) return <h1>You are offline</h1>;
+
   return (
     <div className="body-container container mt-5">
       <div className="filter d-flex justify-content-end mb-3">
-        <button className="filter-btn" onClick={() => restaFilter()}>
+        <button
+          className="px-4 py-2 bg-gray-100 rounded-lg"
+          onClick={restaFilter}
+        >
           Top Rated Restaurants
         </button>
       </div>
       <Search searchText={searchText} setSearchText={setSearchText} />
 
       {showList?.length === 0 && <Shimmer />}
-      <div className="d-flex justify-content-center flex-wrap m-4">
-        <RestaurantCard resData={showList} />
+      <div className="flex flex-wrap" style={{ gap: "20px" }}>
+        {showList?.map((restaurant) => (
+          <Link
+            key={restaurant?.info?.id}
+            to={`/restaurants/${restaurant?.info?.id}`}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
+        ))}
       </div>
     </div>
   );
