@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Search from "../Search";
 import "./style.scss";
-import RestaurantCard from "../RestaurantCard";
+import RestaurantCard, { withVegLabel } from "../RestaurantCard";
 import Shimmer from "../Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../../utils/useOnlineStatus";
@@ -10,6 +10,9 @@ const Body = () => {
   const [restaList, setRestaList] = useState([]);
   const [showList, setShowList] = useState([]);
   const [searchText, setSearchText] = useState("");
+
+  const RestaurantCardVeg = withVegLabel(RestaurantCard);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -34,7 +37,7 @@ const Body = () => {
 
   const restaFilter = () => {
     const filteredRestaurants = showList.filter((item) => {
-      return item?.info?.avgRating > 4.3;
+      return item?.info?.avgRating > 4.0;
     });
     setShowList(filteredRestaurants);
   };
@@ -64,7 +67,7 @@ const Body = () => {
     <div className="body-container container mt-5">
       <div className="filter d-flex justify-content-end mb-3">
         <button
-          className="px-4 py-2 bg-gray-100 rounded-lg"
+          className="px-4 py-2 bg-red-500 text-white font-bold rounded-lg"
           onClick={restaFilter}
         >
           Top Rated Restaurants
@@ -73,13 +76,19 @@ const Body = () => {
       <Search searchText={searchText} setSearchText={setSearchText} />
 
       {showList?.length === 0 && <Shimmer />}
+      {console.log(showList, "data")}
       <div className="flex flex-wrap" style={{ gap: "20px" }}>
         {showList?.map((restaurant) => (
           <Link
             key={restaurant?.info?.id}
             to={`/restaurants/${restaurant?.info?.id}`}
           >
-            <RestaurantCard resData={restaurant} />
+            {/* If the restaurant is veg then add veg label*/}
+            {restaurant?.info?.veg ? (
+              <RestaurantCardVeg resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>
