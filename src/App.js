@@ -7,12 +7,14 @@ import Cart from "./components/Cart";
 import NotFound from "./components/NotFound/NotFound";
 import { Routes, Route } from "react-router-dom";
 import RestarantMenu from "./components/RestaurantMenu/RestarantMenu";
+import { Provider } from "react-redux";
+import store from "./utils/store";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 
 const App = () => {
   return (
-    <>
+    <Provider store={store}>
       <Header />
       <Routes>
         <Route path="/" element={<Body />} />
@@ -30,7 +32,7 @@ const App = () => {
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </Provider>
   );
 };
 

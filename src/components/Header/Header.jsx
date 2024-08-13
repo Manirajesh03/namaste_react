@@ -3,6 +3,7 @@ import "./style.scss";
 import { NavLink } from "react-router-dom";
 import useOnlineStatus from "../../utils/useOnlineStatus";
 import UserContext from "../../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
@@ -12,6 +13,11 @@ const Header = () => {
   const data = useContext(UserContext);
   const { loggedInUser } = data;
   console.log("🚀 ~ Header ~ data:", data);
+
+  //Subscribing to the store using selector
+
+  const cartItems = useSelector((store) => store.cart.items);
+  console.log("🚀 ~ Header ~ cartItems:", cartItems);
 
   return (
     <div className="header">
@@ -48,9 +54,9 @@ const Header = () => {
                 Contact Us
               </NavLink>
             </li>
-            <li className="px-4">
-              <NavLink to="/contact" className="no-underline text-black">
-                Cart
+            <li className="px-4 font-bold text-xl">
+              <NavLink to="/cart" className="no-underline text-black">
+                Cart <sup>({cartItems.length})</sup>
               </NavLink>
             </li>
 
@@ -62,8 +68,11 @@ const Header = () => {
             >
               {btnName}
             </button>
-            <li className="px-4">
-              <NavLink to="/cart" className="no-underline text-black font-bold">
+            <li className="px-4 ">
+              <NavLink
+                to="/login"
+                className="no-underline text-black font-bold"
+              >
                 {loggedInUser}
               </NavLink>
             </li>

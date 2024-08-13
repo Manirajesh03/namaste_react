@@ -15,14 +15,14 @@ const RestaurantCard = (props) => {
           alt=""
           className="rounded-lg w-full h-48 object-cover"
         />
-        <div className="card-info no-underline font-black py-4 px-4">
-          <p className="cuisines font-bold text-xl truncate text-ellipsis overflow-hidden ...">
+        <div className="card-info font-black py-4 px-4">
+          <p className="cuisines text-black no-underline font-bold text-xl truncate text-ellipsis overflow-hidden ...">
             {name}
           </p>
-          <p className="cuisines text-sm truncate text-ellipsis overflow-hidden ...">
+          <p className="cuisines text-black text-sm truncate text-ellipsis overflow-hidden ...">
             {cuisines.join(",")}
           </p>
-          <div className="d-flex justify-content-between card-details">
+          <div className="d-flex justify-content-between card-details text-black">
             <p>{avgRating} Stars</p>
             <p>{sla.deliveryTime} mins</p>
             <p>{loggedInUser}</p>
